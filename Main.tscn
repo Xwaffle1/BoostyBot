@@ -1,0 +1,182 @@
+[gd_scene load_steps=14 format=3 uid="uid://chxxmltpmjah2"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_l82a4"]
+[ext_resource type="Script" path="res://ParallaxBackground.gd" id="2_s5cdb"]
+[ext_resource type="Texture2D" uid="uid://d6qifiq6l8b7" path="res://ui/Xwaffle_a_repeating_scrollable_symmetrical_parallax_bright_blue_f0600499-fada-432b-8e83-4aa98f259db1.png" id="3_ojx43"]
+[ext_resource type="Texture2D" uid="uid://ulnlpbvhgyyc" path="res://ui/original_concept.png" id="5_0bgem"]
+[ext_resource type="PackedScene" uid="uid://cvsrt4ri0dehf" path="res://Pipe.tscn" id="5_ey40o"]
+[ext_resource type="Texture2D" uid="uid://cdjxq2pb08ieo" path="res://ui/button.png" id="6_6r5g7"]
+[ext_resource type="Texture2D" uid="uid://djhangacdnw7e" path="res://ui/button_hover.png" id="7_korxw"]
+[ext_resource type="AudioStream" uid="uid://cqvk0mqnk2rl5" path="res://sounds/arcade-countdown-7007.mp3" id="8_nbeus"]
+[ext_resource type="AudioStream" uid="uid://dux1k44qyxl1h" path="res://sounds/negative_beeps-6008.mp3" id="9_f23qk"]
+[ext_resource type="AudioStream" uid="uid://dfxg3cn7maf5y" path="res://sounds/score.mp3" id="10_d2lmq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_343n8"]
+font_size = 48
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.670588)
+
+[sub_resource type="LabelSettings" id="LabelSettings_u6jv2"]
+font_size = 128
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.670588)
+
+[sub_resource type="LabelSettings" id="LabelSettings_saqoq"]
+font_size = 48
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_l82a4")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_limit_end = Vector2(0, 480)
+script = ExtResource("2_s5cdb")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(306, 0)
+motion_scale = Vector2(1.4, 1.4)
+motion_mirroring = Vector2(1024, 0)
+
+[node name="Sprite" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(4, -485)
+texture = ExtResource("3_ojx43")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1024, 1024)
+
+[node name="Foreground" type="Node2D" parent="."]
+
+[node name="PipeSpawnTimer" type="Timer" parent="Foreground"]
+wait_time = 3.0
+
+[node name="Pipes" type="Node2D" parent="Foreground"]
+position = Vector2(700, 0)
+
+[node name="StartingPipes" parent="Foreground/Pipes" instance=ExtResource("5_ey40o")]
+position = Vector2(-300, 10)
+
+[node name="Score" type="Label" parent="Foreground"]
+visible = false
+offset_left = -20.0
+offset_top = -253.0
+offset_right = 20.0
+offset_bottom = -183.0
+text = "0"
+label_settings = SubResource("LabelSettings_343n8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Countdown" type="Label" parent="Foreground"]
+offset_left = -205.0
+offset_top = -93.0
+offset_right = 203.0
+offset_bottom = 85.0
+text = "READY?"
+label_settings = SubResource("LabelSettings_u6jv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InGameMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -270.0
+offset_right = -500.0
+offset_bottom = -270.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.2, 2.2)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="InGameMenu"]
+layout_mode = 2
+offset_left = 170.0
+offset_top = 17.0
+offset_right = 425.0
+offset_bottom = 432.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.506691, 0.506691)
+texture = ExtResource("5_0bgem")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="InGameMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.48, 0.48)
+
+[node name="TextureButton2" type="TextureButton" parent="InGameMenu"]
+layout_mode = 0
+offset_left = 183.182
+offset_top = 192.273
+offset_right = 375.182
+offset_bottom = 278.273
+scale = Vector2(0.251389, 0.251389)
+texture_normal = ExtResource("6_6r5g7")
+texture_hover = ExtResource("7_korxw")
+
+[node name="Label" type="Label" parent="InGameMenu/TextureButton2"]
+layout_mode = 0
+offset_left = 47.0116
+offset_top = 6.87103
+offset_right = 147.012
+offset_bottom = 76.871
+text = "Quit"
+label_settings = SubResource("LabelSettings_saqoq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="InGameMenu"]
+layout_mode = 0
+offset_left = 236.818
+offset_top = 191.818
+offset_right = 428.818
+offset_bottom = 277.818
+scale = Vector2(0.251389, 0.251389)
+texture_normal = ExtResource("6_6r5g7")
+texture_hover = ExtResource("7_korxw")
+
+[node name="Label" type="Label" parent="InGameMenu/TextureButton"]
+layout_mode = 0
+offset_left = 48.4583
+offset_top = 4.70105
+offset_right = 145.458
+offset_bottom = 74.701
+text = "Play"
+label_settings = SubResource("LabelSettings_saqoq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameStartTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Countdown" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_nbeus")
+
+[node name="GameOver" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_f23qk")
+
+[node name="Score" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_d2lmq")
+
+[connection signal="timeout" from="Foreground/PipeSpawnTimer" to="." method="_on_PipeSpawnTimer_timeout"]
+[connection signal="pressed" from="InGameMenu/TextureButton" to="." method="_on_restart_button_pressed"]
+[connection signal="timeout" from="GameStartTimer" to="." method="_on_game_start_timer_timeout"]

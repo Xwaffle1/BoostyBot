@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvsrt4ri0dehf"]
+
+[ext_resource type="Texture2D" uid="uid://cbj66vkpd8iwr" path="res://neon_tube.png" id="2_ar63d"]
+[ext_resource type="Script" path="res://Pipe.gd" id="2_xetu8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6nm1"]
+size = Vector2(345, 1008)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0b0i"]
+size = Vector2(32, 193)
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(0, 10)
+script = ExtResource("2_xetu8")
+
+[node name="TopPipe" type="Sprite2D" parent="."]
+position = Vector2(0, -300)
+rotation = 3.14159
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_ar63d")
+
+[node name="PipeStaticBody" type="StaticBody2D" parent="TopPipe"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopPipe/PipeStaticBody"]
+position = Vector2(0.00125109, 3.99969)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_f6nm1")
+
+[node name="BottomPipe" type="Sprite2D" parent="."]
+position = Vector2(0, 300)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_ar63d")
+
+[node name="PipeStaticBody" type="StaticBody2D" parent="BottomPipe"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomPipe/PipeStaticBody"]
+position = Vector2(-7.00354e-06, 5.99988)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_f6nm1")
+
+[node name="ScoreArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
+position = Vector2(62, 0)
+shape = SubResource("RectangleShape2D_k0b0i")
+
+[connection signal="body_entered" from="ScoreArea" to="." method="_on_ScoreArea_body_entered"]

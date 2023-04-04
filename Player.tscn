@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://cmmp4dj0cd8el"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_7jqdv"]
+[ext_resource type="Texture2D" uid="uid://bnn5yv23exurn" path="res://bot/bot_1.png" id="2_gklko"]
+[ext_resource type="Texture2D" uid="uid://qs77ul34bm82" path="res://bot/bot_2.png" id="3_37ced"]
+[ext_resource type="Texture2D" uid="uid://co8ht3e3osyvc" path="res://bot/bot.png" id="4_f56hp"]
+[ext_resource type="AudioStream" uid="uid://ce34syiamcym6" path="res://sounds/jump_c_02-102843.mp3" id="5_sqvmi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gwrag"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gklko")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_37ced")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f56hp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_gklko")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_csu7c"]
+radius = 240.208
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4wcr1"]
+radius = 260.768
+
+[node name="Player" type="RigidBody2D"]
+position = Vector2(-300, 0)
+script = ExtResource("1_7jqdv")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_gwrag")
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+scale = Vector2(0.1, 0.1)
+shape = SubResource("CircleShape2D_csu7c")
+
+[node name="PipeDetect" type="Area2D" parent="."]
+
+[node name="PipeDetectCollision2D" type="CollisionShape2D" parent="PipeDetect"]
+scale = Vector2(0.1, 0.1)
+shape = SubResource("CircleShape2D_4wcr1")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_sqvmi")
+
+[connection signal="body_entered" from="." to="Sprite" method="_on_Pipe_body_shape_entered"]
+[connection signal="body_entered" from="PipeDetect" to="." method="_on_pipe_detect_body_entered"]

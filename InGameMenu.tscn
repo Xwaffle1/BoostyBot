@@ -1,0 +1,82 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdjxtmjdtfl14"]
+
+[ext_resource type="Texture2D" uid="uid://ulnlpbvhgyyc" path="res://ui/original_concept.png" id="1_fjyo8"]
+[ext_resource type="Texture2D" uid="uid://cdjxq2pb08ieo" path="res://ui/button.png" id="2_pa3fw"]
+[ext_resource type="Texture2D" uid="uid://djhangacdnw7e" path="res://ui/button_hover.png" id="3_b31bk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_saqoq"]
+font_size = 48
+
+[node name="InGameMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 170.0
+offset_top = 17.0
+offset_right = 425.0
+offset_bottom = 432.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.506691, 0.506691)
+texture = ExtResource("1_fjyo8")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.48, 0.48)
+
+[node name="TextureButton2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 183.182
+offset_top = 192.273
+offset_right = 375.182
+offset_bottom = 278.273
+scale = Vector2(0.251389, 0.251389)
+texture_normal = ExtResource("2_pa3fw")
+texture_hover = ExtResource("3_b31bk")
+
+[node name="Label" type="Label" parent="TextureButton2"]
+layout_mode = 0
+offset_left = 47.0116
+offset_top = 6.87103
+offset_right = 147.012
+offset_bottom = 76.871
+text = "Quit"
+label_settings = SubResource("LabelSettings_saqoq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 236.818
+offset_top = 191.818
+offset_right = 428.818
+offset_bottom = 277.818
+scale = Vector2(0.251389, 0.251389)
+texture_normal = ExtResource("2_pa3fw")
+texture_hover = ExtResource("3_b31bk")
+
+[node name="Label" type="Label" parent="TextureButton"]
+layout_mode = 0
+offset_left = 48.4583
+offset_top = 4.70105
+offset_right = 145.458
+offset_bottom = 74.701
+text = "Play"
+label_settings = SubResource("LabelSettings_saqoq")
+horizontal_alignment = 1
+vertical_alignment = 1

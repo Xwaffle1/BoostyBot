@@ -1,0 +1,116 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwox71cn2nsbd"]
+
+[ext_resource type="Script" path="res://ParallaxBackground.gd" id="1_0yfkw"]
+[ext_resource type="Texture2D" uid="uid://ulnlpbvhgyyc" path="res://ui/original_concept.png" id="1_2gwnw"]
+[ext_resource type="Texture2D" uid="uid://cdjxq2pb08ieo" path="res://ui/button.png" id="2_6e27q"]
+[ext_resource type="Texture2D" uid="uid://dj7146y4163xy" path="res://background.png" id="2_tywcx"]
+[ext_resource type="Texture2D" uid="uid://djhangacdnw7e" path="res://ui/button_hover.png" id="3_ppcvg"]
+[ext_resource type="Script" path="res://MainMenuPlayButton.gd" id="5_72edh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_saqoq"]
+font_size = 48
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2(125, 200)
+scale = Vector2(0.5, 0.5)
+transform = Transform2D(0.5, 0, 0, 0.5, 125, 200)
+script = ExtResource("1_0yfkw")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, -116)
+motion_mirroring = Vector2(1000, 1000)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+position = Vector2(240, 53)
+texture = ExtResource("2_tywcx")
+region_enabled = true
+region_rect = Rect2(-46.3151, 202.628, 1074.69, 710.133)
+region_filter_clip_enabled = true
+
+[node name="InGameMenu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="InGameMenu"]
+layout_mode = 2
+offset_left = 170.0
+offset_top = 17.0
+offset_right = 425.0
+offset_bottom = 432.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.506691, 0.506691)
+texture = ExtResource("1_2gwnw")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="InGameMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.48, 0.48)
+
+[node name="TextureButton2" type="TextureButton" parent="InGameMenu"]
+layout_mode = 0
+offset_left = 183.182
+offset_top = 192.273
+offset_right = 375.182
+offset_bottom = 278.273
+scale = Vector2(0.251389, 0.251389)
+texture_normal = ExtResource("2_6e27q")
+texture_hover = ExtResource("3_ppcvg")
+
+[node name="Label" type="Label" parent="InGameMenu/TextureButton2"]
+layout_mode = 0
+offset_left = 47.0116
+offset_top = 6.87103
+offset_right = 144.012
+offset_bottom = 76.871
+text = "Quit"
+label_settings = SubResource("LabelSettings_saqoq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="InGameMenu"]
+layout_mode = 0
+offset_left = 236.818
+offset_top = 191.818
+offset_right = 428.818
+offset_bottom = 277.818
+scale = Vector2(0.251389, 0.251389)
+texture_normal = ExtResource("2_6e27q")
+texture_hover = ExtResource("3_ppcvg")
+script = ExtResource("5_72edh")
+
+[node name="Label" type="Label" parent="InGameMenu/TextureButton"]
+layout_mode = 0
+offset_left = 48.4583
+offset_top = 4.70105
+offset_right = 145.458
+offset_bottom = 74.701
+text = "Play"
+label_settings = SubResource("LabelSettings_saqoq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="InGameMenu/TextureButton" to="InGameMenu/TextureButton" method="_on_pressed"]
