@@ -2,9 +2,10 @@ extends Node2D
 
 var pipe_speed = 200
 var pipe_gap_size = 200
+var pipe_offset = -1
 
 func _ready():
-	var pipe_offset = randf_range(-200, 200)
+	pipe_offset = randf_range(-200, 200)
 	position.y = pipe_offset;
 
 func _process(delta):

@@ -8,8 +8,8 @@ var max_speed = 0
 #func _ready():
 #	$Sprite.play("default")
 
-func inc_score():
-	get_tree().root.get_node("Game").inc_score()
+func inc_score(amt = 1):
+	get_tree().root.get_node("Game").inc_score(amt)
 
 func _physics_process(delta):
 	if !get_tree().root.get_node("Game").is_game_started:
@@ -51,7 +51,11 @@ func _physics_process(delta):
 		set_linear_velocity(Vector2(get_linear_velocity().x, -jump_power))
 
 
-func _on_pipe_detect_body_entered(body):
+
+func _on_detect_body_entered(body):
 	if body.name == 'PipeStaticBody':
 		get_tree().root.get_node("Game").game_over()
+	if body.name == 'PointBoostStaticBody':
+		body.get_parent().queue_free();
+		inc_score(2)
 		

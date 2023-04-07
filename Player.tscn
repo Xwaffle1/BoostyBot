@@ -45,6 +45,8 @@ scale = Vector2(0.1, 0.1)
 shape = SubResource("CircleShape2D_csu7c")
 
 [node name="PipeDetect" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="PipeDetectCollision2D" type="CollisionShape2D" parent="PipeDetect"]
 scale = Vector2(0.1, 0.1)
@@ -54,4 +56,4 @@ shape = SubResource("CircleShape2D_4wcr1")
 stream = ExtResource("5_sqvmi")
 
 [connection signal="body_entered" from="." to="Sprite" method="_on_Pipe_body_shape_entered"]
-[connection signal="body_entered" from="PipeDetect" to="." method="_on_pipe_detect_body_entered"]
+[connection signal="body_entered" from="PipeDetect" to="." method="_on_detect_body_entered"]

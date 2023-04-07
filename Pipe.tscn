@@ -23,7 +23,6 @@ texture = ExtResource("2_ar63d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopPipe/PipeStaticBody"]
 position = Vector2(0.00125109, 3.99969)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_f6nm1")
 
 [node name="BottomPipe" type="Sprite2D" parent="."]
@@ -35,7 +34,6 @@ texture = ExtResource("2_ar63d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomPipe/PipeStaticBody"]
 position = Vector2(-7.00354e-06, 5.99988)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_f6nm1")
 
 [node name="ScoreArea" type="Area2D" parent="."]
